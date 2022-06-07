@@ -1,4 +1,10 @@
-const sum = (x, y) => {x + y};
-const sus = (x, y) => {x - y};
+const average = array => {
+    if (array.length === 0) return 0;
+    let sum = 0;
+    array.forEach(value => {
+        sum += value;
+    });
+    return sum / array.length;
+}
 
-export default {sum, sus};
+module.exports = { average };
