@@ -1,2 +1,4 @@
-# Parcial2-IS
-2da Instancia de Evaluación | Ingeniería de Software 2022 | UTN FRRe
+# Entorno de IC | Segunda Instancia de Evaluación
+### Alumno: CHAMORRO, Ian
+### Materia: Ingeniería de Software
+### UTN FRRe - 2022
