@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "dev": "npm test && npm start",
+    "start": "node src/app.js",
     "test": "jest --verbose"
   },
   "repository": {
