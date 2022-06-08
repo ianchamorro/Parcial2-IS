@@ -1,4 +1,6 @@
 version: 2.1
+orbs: 
+  slack: circleci/slack@4.10.1
 jobs:
   build:
     docker:
@@ -20,6 +22,14 @@ jobs:
           name: Execute app.js
           command: |
             npm run start
+      - slack/notify:
+        event: pass
+        mentions: "@Ian Chamorro"
+        template: basic_success_1
+      - slack/notify:
+        event: fail
+        mentions: "@Ian Chamorro"
+        template: basic_fail_1
 workflows:
   build_test:
     jobs:
