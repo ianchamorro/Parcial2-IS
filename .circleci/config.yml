@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+  run_test:
+    docker:
+      - image: circle/node:16.15.1
+    step:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm install --save
+      - run:
+          name: Run Unit Tests
+          command: npm run test
+workflows:
+  build_test:
+    jobs:
+      - run_test
