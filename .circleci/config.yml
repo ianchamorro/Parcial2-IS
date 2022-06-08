@@ -3,6 +3,9 @@ jobs:
   run_tests:
     docker:
       - image: circleci/node:16.15.1
+        auth:
+          username: ianchamorro1
+          password: dockerpass
     steps:
       - checkout
       - run:
@@ -16,6 +19,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:16.15.1
+        auth:
+          username: ianchamorro1
+          password: dockerpass
     steps:
       - checkout
       - run: npm run start
