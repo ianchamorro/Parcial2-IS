@@ -24,6 +24,10 @@ jobs:
           password: dockerpass
     steps:
       - checkout
+      - run:
+          name: Install npm dependencies
+          command: |
+            npm install --save
       - run: npm run start
 workflows:
   build_test:
