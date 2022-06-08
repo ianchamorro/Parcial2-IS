@@ -1,6 +1,6 @@
 version: 2.1
-executors:
-  my-custom-executor:
+jobs:
+  run_tests:
     docker:
       - image: circleci/node:16.15.1
     steps:
@@ -20,7 +20,7 @@ executors:
       - checkout
       - run: npm run start
 workflows:
-  my-custom-workflow:
+  build_test:
     jobs:
       - run_test
       - build
