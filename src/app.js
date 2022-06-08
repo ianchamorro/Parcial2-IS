@@ -1,11 +1,8 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+const { average } = require('./index');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+console.log(`First entry: 6`);
+console.log(`... The average is ${average([6])}\n`);
+console.log(`Second entry: 23, 5, 26, 12`);
+console.log(`... The average is ${average([23, 5, 26, 12])}\n`);
+console.log(`Third entry:`);
+console.log(`... The average is ${average([])}`);
