@@ -1,19 +1,21 @@
 version: 2.1
-jobs:
-  run_test:
+executors:
+  my-custom-executor:
     docker:
-      - image: circle/node:16.15.1
-    step:
+      - image: cimg/node
+        #auth:
+          # ensure you have first added these secrets
+          # visit app.circleci.com/settings/project/github/ianchamorro/parcial2-is/environment-variables
+          #username: $DOCKER_HUB_USER
+          #password: $DOCKER_HUB_PASSWORD
+jobs:
+  run-app:
+    executor: my-custom-executor
+    steps:
       - checkout
-      - run:
-          name: Install npm dependencies
-          command: |
-            npm install --save
-      - run:
-          name: Run Unit Tests
-          command: |
-            npm run test
+      - run: |
+          npm run dev
 workflows:
-  build_test:
+  my-custom-workflow:
     jobs:
-      - run_test
+      - run-app
