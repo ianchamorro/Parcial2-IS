@@ -4,26 +4,26 @@ orbs:
   slack: circleci/slack@4.10.1
 jobs:
   build:
-    executor: noce/default
+    executor: node/default
     steps:
       - checkout
       - slack/notify:
-          event: always
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "*Starting Test Job!! 💣*",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
+            event: always
+            custom: |
+              {
+                "blocks": [
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "plain_text",
+                        "text": "*Starting Test Job!! 💣*",
+                        "emoji": true
+                      }
+                    ]
+                  }
+                ]
+              }
       - run:
           name: Install npm dependencies
           command: |
@@ -44,29 +44,7 @@ jobs:
           name: Execute app.js
           command: |
             npm run start
-  notify:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - slack/notify:
-        event: always
-        custom: |
-          {
-            "blocks": [
-              {
-                "type": "section"
-                "fields": [
-                  {
-                    "type": "plain_text",
-                    "text": "*This is a text notification*"
-                    "emoji": true
-                  }
-                ]
-              }
-            ]
-          }
 workflows:
   build_test:
     jobs:
       - build
-      - notify
