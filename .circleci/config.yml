@@ -18,19 +18,34 @@ jobs:
           name: Run Unit Tests
           command: |
             npm run test
-      - slack/notify:
-        event: pass
-        mentions: "@Ian Chamorro"
-        template: basic_success_1
-      - slack/notify:
-        event: fail
-        mentions: "@Ian Chamorro"
-        template: basic_fail_1
+      
       - run: 
           name: Execute app.js
           command: |
             npm run start
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+        event: always
+        custom: |
+          {
+            "blocks": [
+              {
+                "type": "section"
+                "fields": [
+                  {
+                    "type": "plain_text",
+                    "text": "*This is a text notification*"
+                    "emoji": true
+                  }
+                ]
+              }
+            ]
+          }
 workflows:
   build_test:
     jobs:
       - build
+      - notify
