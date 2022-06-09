@@ -1,15 +1,29 @@
 version: 2.1
-orbs: 
+orbs:
+  node: circleci/node@5.0.2
   slack: circleci/slack@4.10.1
 jobs:
   build:
-    docker:
-      - image: circleci/node
-        auth:
-          username: ianchamorro1
-          password: dockerpass
+    executor: noce/default
     steps:
       - checkout
+      - slack/notify:
+          event: always
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*Starting Test Job!! 💣*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
       - run:
           name: Install npm dependencies
           command: |
@@ -18,7 +32,14 @@ jobs:
           name: Run Unit Tests
           command: |
             npm run test
-      
+      - slack/notify:
+          event: fail
+          mentions: "@Ian Chamorro"
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          mentions: "@Ian Chamorro"
+          template: basic_success_1
       - run: 
           name: Execute app.js
           command: |
