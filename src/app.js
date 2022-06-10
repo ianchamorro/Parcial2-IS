@@ -1,8 +1,11 @@
-const { average } = require('./index');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
 
-console.log(`First entry: 6`);
-console.log(`... The average is ${average([6])}\n`);
-console.log(`Second entry: 23, 5, 26, 12`);
-console.log(`... The average is ${average([23, 5, 26, 12])}\n`);
-console.log(`Third entry:`);
-console.log(`... The average is ${average([])}`);
+app.get('/', (req, res) => {
+    res.send('2da Instancia de Evaluación | Ingeniería de Sofware\nCHAMORRO, Ian');
+});
+
+app.listen(port, () => {
+    console.log(`This app is listening in port: ${PORT}`);
+});

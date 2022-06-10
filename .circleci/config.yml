@@ -2,8 +2,9 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
   slack: circleci/slack@4.10.1
+  heroku: circleci/heroku@1.2.6
 jobs:
-  build:
+  test:
     executor: node/default
     steps:
       - checkout
@@ -40,11 +41,14 @@ jobs:
           event: pass
           mentions: "@Ian Chamorro"
           template: basic_success_1
-      - run: 
-          name: Execute app.js
-          command: |
-            npm run start
 workflows:
   build_test:
     jobs:
-      - build
+      - test
+      - heroku/deploy-via-git:
+          force: true 
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
